@@ -13,7 +13,7 @@ public class PlaceableItemScript : MonoBehaviour, IPointerDownHandler, IBeginDra
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        canvas = GameObject.Find("BaseCanvas").GetComponent<Canvas>();
         if (canvas == null)
         {
             Debug.LogError("Canvas not found. Please ensure there is a Canvas in the scene.");
