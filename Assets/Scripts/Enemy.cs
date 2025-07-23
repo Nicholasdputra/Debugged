@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    public static float movementSpeedMultiplier = 0.5f;
     public bool canMove;
     public int health;
     public float speed;
     public Rigidbody2D rb;
+    public int row;
 
     // Method to handle enemy movement
     public void Move()
@@ -37,6 +37,8 @@ public abstract class Enemy : MonoBehaviour
     public void Die()
     {
         Debug.Log("Enemy Died");
+        GameManagerScript.Instance.spawnManager.enemyInRow[row]--;
+        GameManagerScript.Instance.spawnManager.enemiesLeft--;
         Destroy(gameObject);
     }
 }

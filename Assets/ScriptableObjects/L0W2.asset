@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee318436f159a1a45adaa84d03efb772, type: 3}
+  m_Name: L0W2
+  m_EditorClassIdentifier: 
+  enemyInformation:
+  - enemyPrefab: {fileID: 1443989918742903500, guid: 0ca7fd79438e3c148a80f84ffe623ae1, type: 3}
+    count: 5
+  - enemyPrefab: {fileID: 4149034562107534103, guid: b31b33afdff570b44a6ed020d1622ab8, type: 3}
+    count: 5
+  spawnInterval: 2

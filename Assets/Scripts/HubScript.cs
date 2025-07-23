@@ -1,25 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class HubScript : MonoBehaviour
 {
+    [Header("Charge Settings")]
     public float currentCharge;
     public float maxCharge;
+    // public Slider chargeBar;
+    public TextMeshProUGUI chargeText;
 
-    public Slider chargeBar;
+    [Header("Load Settings")]
+    public int currentLoad;
+    public int maxLoad;
+    public TextMeshProUGUI loadText;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        chargeBar = GetComponent<Slider>();
+        // chargeBar = GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SetUI();
+    }
+
+    void SetUI()
+    {
+        // chargeBar.value = currentCharge / maxCharge;
+        chargeText.text = "Charge: " + currentCharge + "/" + maxCharge;
+        loadText.text = "Load: " + currentLoad + "/" + maxLoad;
     }
 }

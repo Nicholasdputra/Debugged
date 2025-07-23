@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlaceableSlot : MonoBehaviour, IDropHandler
+public class PlaceableSlotScript : MonoBehaviour, IDropHandler
 {
     RectTransform rectTransform;
     Vector3 worldPosition;

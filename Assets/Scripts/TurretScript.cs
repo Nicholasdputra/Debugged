@@ -1,45 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicTower : Tower
+public class TurretScript : Tower
 {
     public GameObject projectilePrefab;
-    public int projectileSpeed = 2;
+    int projectileSpeed = 6;
 
     void Start()
     {
-        mainHub = GameObject.Find("Battery").GetComponent<HubScript>();
+        mainHub = transform.parent.Find("Battery").GetComponent<HubScript>();
         
         attackCoroutine = null;
         drainCoroutine = null;
 
         state = 0; // Initial state
         switchCooldown = 2f;
-        switchOnCost = 2;
+        switchOnCost = 15;
 
-        passiveDrain = 1;
-        drainCooldown = 1f;
+        passiveDrain = 3;
+        drainCooldown = 5f;
 
-        damage = 1;
-        range = 5f;
+        damage = 50;
+        range = 999f;
         attackCooldown = 2.5f;
-        attackCost = 1;
+        attackCost = 3;
         
         // Initialize the tower
         SpawnUIButtons();
     }
-    
+
     void Update()
     {
+        CheckForCharge();
         if (state == 1)
         {
             if (attackCoroutine == null)
-            { 
+            {
                 Debug.Log("Starting attack coroutine for:" + gameObject.name);
-                attackCoroutine = StartCoroutine(AttackCoroutine());            
+                attackCoroutine = StartCoroutine(AttackCoroutine());
             }
-            if(drainCoroutine == null)
+            if (drainCoroutine == null)
             {
                 Debug.Log("Starting drain coroutine for:" + gameObject.name);
                 drainCoroutine = StartCoroutine(DrainCoroutine());
@@ -64,12 +63,13 @@ public class BasicTower : Tower
 
     protected override void Attack()
     {
-        Debug.Log("Attacking with Basic Tower: " + gameObject.name);
+        // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
         // Implement attack logic here
         GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        proj.layer = 2;
 
         mainHub.currentCharge -= attackCost; // Deduct charge for attack
-        Debug.Log("Current Charge After Attack: " + mainHub.currentCharge);
+        // Debug.Log("Current Charge After Attack: " + mainHub.currentCharge);
 
         BasicProjectileScript projectileScript = proj.GetComponent<BasicProjectileScript>();
         if (projectileScript != null)

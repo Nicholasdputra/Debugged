@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : Enemy
+public class T2BasicEnemy : Enemy
 {
     void Start()
     {
         canMove = true;
-        health = 10;
-        speed = 0.5f;
+        health = 500;
+        speed = movementSpeedMultiplier * 1.0f;
         rb = GetComponent<Rigidbody2D>();
     }
 
