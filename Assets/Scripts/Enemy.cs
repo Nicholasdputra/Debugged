@@ -37,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
     public void Die()
     {
         Debug.Log("Enemy Died");
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.enemyDeathSFXClip);
         GameManagerScript.Instance.spawnManager.enemyInRow[row]--;
         GameManagerScript.Instance.spawnManager.enemiesLeft--;
         Destroy(gameObject);

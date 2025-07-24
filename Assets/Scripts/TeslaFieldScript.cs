@@ -32,6 +32,7 @@ public class TeslaFieldScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.teslaZapSFXClip);
             // Apply damage or effects to the enemy
             Enemy enemy = collision.GetComponent<Enemy>();
             if (enemy != null)

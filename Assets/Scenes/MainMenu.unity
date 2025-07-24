@@ -2196,15 +2196,15 @@ MonoBehaviour:
   mainMenuBGMClip: {fileID: 0}
   gameBGMClip: {fileID: 0}
   gameOverBGMClip: {fileID: 0}
-  buttonClickSFXClip: {fileID: 0}
-  turningOnTowerSFXClip: {fileID: 0}
-  turningOffTowerSFXClip: {fileID: 0}
-  turretFireSFXClip: {fileID: 0}
-  turretProjectileHitSFXClip: {fileID: 0}
-  teslaChargeSFXClip: {fileID: 0}
-  teslaZapSFXClip: {fileID: 0}
-  enemyHitBarrierSFXClip: {fileID: 0}
-  enemyDeathSFXClip: {fileID: 0}
+  buttonClickSFXClip: {fileID: 8300000, guid: f40f88bae9be6fa4db7edd9e6f918e2c, type: 3}
+  turningOnTowerSFXClip: {fileID: 8300000, guid: 6fe560b608e22344f9efecb55e6603f6, type: 3}
+  turningOffTowerSFXClip: {fileID: 8300000, guid: 8377bcacbbae40946b6e7f7d89b37bd5, type: 3}
+  turretFireSFXClip: {fileID: 8300000, guid: 59768e0b47b9c1e4fba1c3923e5b6fc9, type: 3}
+  turretProjectileHitSFXClip: {fileID: 8300000, guid: 723fc0eef6b2eef4d9068a7c7ae39e71, type: 3}
+  teslaChargeSFXClip: {fileID: 8300000, guid: 04376c2cc2f3129439ad1cfc4591d583, type: 3}
+  teslaZapSFXClip: {fileID: 8300000, guid: 865eb52ff95276540b17ea80da88aef8, type: 3}
+  enemyHitBarrierSFXClip: {fileID: 8300000, guid: 202da974cb26b624fb3eca4f076e0371, type: 3}
+  enemyDeathSFXClip: {fileID: 8300000, guid: cf7fef5ad45009546be94c1604da179e, type: 3}
 --- !u!1 &1413549355
 GameObject:
   m_ObjectHideFlags: 0

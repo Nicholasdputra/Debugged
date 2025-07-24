@@ -11,7 +11,7 @@ public class BarrierScript : MonoBehaviour
             GameManagerScript.Instance.spawnManager.enemiesLeft--;
             GameManagerScript.Instance.spawnManager.enemyInRow[other.GetComponent<Enemy>().row]--;
             
-
+            AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.enemyHitBarrierSFXClip);
             Destroy(other.gameObject); // Destroy the enemy on collision
             health--; // Reduce health when an enemy collides
 

@@ -65,6 +65,7 @@ public class TurretScript : Tower
     {
         // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
         // Implement attack logic here
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretFireSFXClip);
         GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         proj.layer = 2;
 

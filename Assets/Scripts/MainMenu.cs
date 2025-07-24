@@ -41,21 +41,21 @@ public class MainMenuScript : MonoBehaviour
 
     void Play()
     {
-        audioManager.PlaySFX(audioManager.buttonClickSFXClip);
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         Time.timeScale = 1f; // Ensure the game runs at normal speed
         SceneManager.LoadScene("LevelSelect");
     }
 
     void Settings()
     {
-        audioManager.PlaySFX(audioManager.buttonClickSFXClip);
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         // Show the settings panel
         settingsPanel.SetActive(true);
     }
 
     void Quit()
     {
-        audioManager.PlaySFX(audioManager.buttonClickSFXClip);
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         Application.Quit();
     }
 }

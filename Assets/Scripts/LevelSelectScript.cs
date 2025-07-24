@@ -27,6 +27,7 @@ public class LevelSelectScript : MonoBehaviour
 
     void GoToLevel(int levelIndex)
     {
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         // Load the selected level scene
         GameManagerScript.Instance.currentLevel = levelIndex;
         SceneManager.sceneLoaded += OnLevelLoaded;
@@ -117,6 +118,7 @@ public class LevelSelectScript : MonoBehaviour
 
     void BackToMainMenu()
     {
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         // Load the main menu scene
         SceneManager.LoadScene("MainMenu");
     }

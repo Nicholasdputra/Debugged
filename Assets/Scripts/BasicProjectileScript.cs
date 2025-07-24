@@ -16,6 +16,7 @@ public class BasicProjectileScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretProjectileHitSFXClip);
             Debug.Log("Hit an enemy!");
             // Deal damage to the enemy
             Enemy enemy = other.gameObject.GetComponent<Enemy>();

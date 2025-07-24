@@ -92,7 +92,7 @@ public class SettingsScript : MonoBehaviour
     
     public void CloseSettings()
     {
-        audioManager.PlaySFX(audioManager.buttonClickSFXClip);
+        AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         Debug.Log("Closing window");
         gameObject.SetActive(false);
     }

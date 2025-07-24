@@ -63,4 +63,9 @@ public class AudioManagerScript : MonoBehaviour
     {
         sfxAudioSource.PlayOneShot(clip);
     }
+    
+    public void PlayPassiveSound(AudioClip clip)
+    {
+        passiveSoundsAudioSource.PlayOneShot(clip);
+    }
 }

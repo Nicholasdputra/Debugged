@@ -31,7 +31,7 @@ public class HubScript : MonoBehaviour
     void SetUI()
     {
         // chargeBar.value = currentCharge / maxCharge;
-        chargeText.text = "Charge: " + currentCharge + "/" + maxCharge;
-        loadText.text = "Load: " + currentLoad + "/" + maxLoad;
+        chargeText.text = currentCharge + "/" + maxCharge;
+        loadText.text = currentLoad + "/" + maxLoad;
     }
 }
