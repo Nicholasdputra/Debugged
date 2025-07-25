@@ -4,6 +4,7 @@ public class BasicProjectileScript : MonoBehaviour
 {
     public int damage;
     public int speed;
+    public int lane;
 
     // Update is called once per frame
     void Update()
@@ -14,7 +15,7 @@ public class BasicProjectileScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && other.GetComponent<Enemy>().row + 1 == lane)
         {
             AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretProjectileHitSFXClip);
             Debug.Log("Hit an enemy!");
