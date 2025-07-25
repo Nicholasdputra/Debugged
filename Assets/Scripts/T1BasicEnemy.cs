@@ -13,6 +13,5 @@ public class T1BasicEnemy : Enemy
     void Update()
     {
         CheckIfCanMove();
-        CheckIfDead();
     }
 }

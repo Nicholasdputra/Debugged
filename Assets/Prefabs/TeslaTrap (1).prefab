@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 46838406270374753}
   - component: {fileID: 7683356624942907844}
   - component: {fileID: 6625489533679119332}
+  - component: {fileID: 5130228722229245699}
   m_Layer: 0
   m_Name: TeslaTrap (1)
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2211939254792469119}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.44, y: 0.78, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e54658be8695a50439cd6605a7887ae7, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -1765379370, guid: 5f91a9d37ff51bb459a1badba925f281, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,14 +146,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainHub: {fileID: 0}
   buttonPrefab: {fileID: 2168438030662410479, guid: 9489f92c093f6484ba0132b1e022df13, type: 3}
+  animator: {fileID: 0}
   state: 0
   switchCooldown: 0
   canSwitch: 1
   switchOnCost: 0
   passiveDrain: 0
   drainCooldown: 0
+  canAttack: 0
   damage: 0
   range: 0
   attackCost: 0
-  teslaFieldPrefab: {fileID: 4979252041126468940, guid: 8f0dd2c501048b9458617e9187e63890, type: 3}
+  spriteRenderer: {fileID: 0}
+  baseOnSprite: {fileID: 1079376815, guid: 5f91a9d37ff51bb459a1badba925f281, type: 3}
+  baseOffSprite: {fileID: -1765379370, guid: 5f91a9d37ff51bb459a1badba925f281, type: 3}
+  teslaFieldPrefab: {fileID: 6426020055124938595, guid: 8f0dd2c501048b9458617e9187e63890, type: 3}
   teslaFieldExpansionSpeed: 1
+--- !u!95 &5130228722229245699
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2211939254792469119}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e64ca308e9246b45811de04d841a6e2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

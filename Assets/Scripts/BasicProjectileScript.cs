@@ -23,7 +23,7 @@ public class BasicProjectileScript : MonoBehaviour
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.health -= damage;
+                enemy.TakeDamage(damage);
             }
             
             // Destroy the projectile after hitting an enemy

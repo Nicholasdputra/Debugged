@@ -7,12 +7,11 @@ using Unity.VisualScripting;
 
 public abstract class Tower : MonoBehaviour
 {
-    [Header("References To Other Scripts")]
+    [Header("References To Other Objects")]
     public HubScript mainHub;
-
-    [Header("UI Elements")]
     GameObject button;
     public GameObject buttonPrefab;
+    public Animator animator;
 
     [Header("Switching On/Off Settings")]
     public int state;
@@ -33,51 +32,70 @@ public abstract class Tower : MonoBehaviour
     protected float attackCooldown;
     public float attackCost;
 
+    public Coroutine turnOffAnimatorCoroutine; // Add this field
+    public SpriteRenderer spriteRenderer;
+    public Sprite baseOnSprite;
+    public Sprite baseOffSprite;
+
     void SwitchStates()
     {
         if (state == 0 && RequirementCheck() && canSwitch)
         {
+            animator.enabled = true; // Enable the animator component
+            state = 1; // Switch On
+            animator.SetInteger("state", state); // Set the animator state to "On" 
             mainHub.currentLoad += 1; // Increment load when switching on
             mainHub.currentCharge -= switchOnCost; // Deduct charge for switching on
-            state = 1; // Switch On
             button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn Off";
             StartCoroutine(SwitchCooldownCoroutine());
-            Debug.Log("Tower is now ON");
+            // Debug.Log("Tower is now ON");
         }
         else if (state == 1 && canSwitch)
         {
+            animator.enabled = true; // Enable the animator component
             mainHub.currentLoad -= 1; // Decrement load when switching off
             state = 0; // Switch Off
+            animator.SetInteger("state", state); // Set the animator state to "Off"
+            StartCoroutine(TurnOffAnimatorCoroutine());
             button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
-            StartCoroutine(SwitchCooldownCoroutine());  
-            Debug.Log("Tower is now OFF");
+            StartCoroutine(SwitchCooldownCoroutine());
+            // Debug.Log("Tower is now OFF");
         }
         else
         {
-            Debug.Log("Not enough charge to switch states");
+            // Debug.Log("Not enough charge to switch states");
         }
+    }
+
+    public IEnumerator TurnOffAnimatorCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        //set the animator component to inactive after the switch animation
+        animator.enabled = false;
+        spriteRenderer.sprite = (state == 1) ? baseOnSprite : baseOffSprite;
+        turnOffAnimatorCoroutine = null; // Clear reference
     }
     
     public bool RequirementCheck()
     {
         if (mainHub.currentLoad < mainHub.maxLoad && mainHub.currentCharge >= switchOnCost)
         {
-            Debug.Log("Requirements fulfilled for switching on the tower.");
+            // Debug.Log("Requirements fulfilled for switching on the tower.");
             return true;
         }
         else if (mainHub.currentLoad >= mainHub.maxLoad)
         {
-            Debug.Log("Cannot switch on tower: Load limit reached.");
+            // Debug.Log("Cannot switch on tower: Load limit reached.");
             return false;
         }
         else if (mainHub.currentCharge < switchOnCost)
         {
-            Debug.Log("Cannot switch on tower: Not enough charge.");
+            // Debug.Log("Cannot switch on tower: Not enough charge.");
             return false;
         }
         else
         {
-            Debug.Log("Unknown error in RequirementCheck.");
+            // Debug.Log("Unknown error in RequirementCheck.");
             // This should not happen, but just in case
             return false;
         }
@@ -91,6 +109,10 @@ public abstract class Tower : MonoBehaviour
             {
                 Debug.Log("Not enough charge to keep the tower ON, switching OFF");
                 state = 0; // Switch Off
+                // canAttack = false; // Disable attack
+                animator.enabled = true; // Enable the animator component
+                animator.SetInteger("state", state);
+                StartCoroutine(TurnOffAnimatorCoroutine());
             }
         }
     }
@@ -107,6 +129,10 @@ public abstract class Tower : MonoBehaviour
                 Attack();
                 yield return new WaitForSeconds(attackCooldown);
             }
+            else if (mainHub.currentCharge >= attackCost)
+            {
+                // Debug.Log("Cannot attack right now, waiting for cooldown");
+            }
             else
             {
                 // Debug.Log("Not enough charge to attack");
@@ -121,8 +147,16 @@ public abstract class Tower : MonoBehaviour
         canSwitch = false;
         yield return new WaitForSeconds(switchCooldown);
         canSwitch = true;
-        Debug.Log("Switch cooldown complete, can switch again");
+        // Debug.Log("Switch cooldown complete, can switch again");
     }
+
+    // public IEnumerator FirstAttackDelayCoroutine()
+    // {
+    //     yield return new WaitForSeconds(0.5f); // Delay before the first attack
+    //     attackCoroutine = StartCoroutine(AttackCoroutine());
+        
+    //     attackDelayCoroutine = null; // Reset the coroutine reference
+    // }
 
     public IEnumerator DrainCoroutine()
     {
@@ -158,7 +192,7 @@ public abstract class Tower : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        Debug.Log("Pointer entered tower: " + gameObject.name);
+        // Debug.Log("Pointer entered tower: " + gameObject.name);
         if (button != null)
         {
             button.SetActive(true);
@@ -167,7 +201,7 @@ public abstract class Tower : MonoBehaviour
 
     public void OnMouseExit()
     {
-        Debug.Log("Pointer exited tower: " + gameObject.name);
+        // Debug.Log("Pointer exited tower: " + gameObject.name);
         if (button != null)
         {
             button.SetActive(false);

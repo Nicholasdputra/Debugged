@@ -53,13 +53,13 @@ public class TurretScript : Tower
         {
             if (attackCoroutine != null)
             {
-                Debug.Log("Stopping attack coroutine for:" + gameObject.name);
+                // Debug.Log("Stopping attack coroutine for:" + gameObject.name);
                 StopCoroutine(attackCoroutine);
                 attackCoroutine = null;
             }
             if (drainCoroutine != null)
             {
-                Debug.Log("Stopping drain coroutine for:" + gameObject.name);
+                // Debug.Log("Stopping drain coroutine for:" + gameObject.name);
                 StopCoroutine(drainCoroutine);
                 drainCoroutine = null;
             }
@@ -80,6 +80,19 @@ public class TurretScript : Tower
     {
         // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
         // Implement attack logic here
+        if(animator.enabled == false)
+        {
+            animator.enabled = true; // Enable the animator to play the attack animation
+        }
+        animator.SetTrigger("Attack");
+
+        if (turnOffAnimatorCoroutine != null)
+        {
+            StopCoroutine(turnOffAnimatorCoroutine); // Stop any existing coroutine
+            turnOffAnimatorCoroutine = null; // Clear reference
+        }
+        turnOffAnimatorCoroutine = StartCoroutine(TurnOffAnimatorCoroutine());
+        
         AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretFireSFXClip);
         GameObject proj = Instantiate(projectilePrefab, muzzle.transform.position, Quaternion.identity);
         proj.layer = 2;

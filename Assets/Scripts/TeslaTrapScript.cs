@@ -9,6 +9,8 @@ public class TeslaTrapScript : Tower
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         mainHub = transform.parent.Find("Battery").GetComponent<HubScript>();
         
         attackCoroutine = null;
@@ -21,7 +23,7 @@ public class TeslaTrapScript : Tower
         passiveDrain = 4;
         drainCooldown = 5f;
 
-        damage = 20;
+        damage = 15;
         range = 3f;
         attackCooldown = 1f;
         attackCost = 3;
@@ -33,20 +35,7 @@ public class TeslaTrapScript : Tower
     void Update()
     {
         CheckForCharge();
-        if (state == 1)
-        {
-            if (attackCoroutine == null)
-            {
-                Debug.Log("Starting attack coroutine for:" + gameObject.name);
-                attackCoroutine = StartCoroutine(AttackCoroutine());
-            }
-            if (drainCoroutine == null)
-            {
-                Debug.Log("Starting drain coroutine for:" + gameObject.name);
-                drainCoroutine = StartCoroutine(DrainCoroutine());
-            }
-        }
-        else if (state == 0)
+        if (state == 0)
         {
             if (attackCoroutine != null)
             {
@@ -61,13 +50,32 @@ public class TeslaTrapScript : Tower
                 drainCoroutine = null;
             }
         }
+        if(state == 1)
+        {
+            if (attackCoroutine == null)
+            {
+                Debug.Log("Starting attack coroutine for:" + gameObject.name);
+                attackCoroutine = StartCoroutine(AttackCoroutine());
+            }
+            if (drainCoroutine == null)
+            {
+                Debug.Log("Starting drain coroutine for:" + gameObject.name);
+                drainCoroutine = StartCoroutine(DrainCoroutine());
+            }
+        }
     }
 
     protected override void Attack()
     {
+        if (turnOffAnimatorCoroutine != null)
+        {
+            StopCoroutine(turnOffAnimatorCoroutine); // Stop any existing coroutine
+            turnOffAnimatorCoroutine = null; // Clear reference
+        }
         // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
         // Implement attack logic here
         GameObject proj = Instantiate(teslaFieldPrefab, transform.position, Quaternion.identity);
+        proj.GetComponent<TeslaFieldScript>().damage = damage;
         proj.layer = 2;
 
         mainHub.currentCharge -= attackCost; // Deduct charge for attack

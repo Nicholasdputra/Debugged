@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript Instance;
     public int state;
+
     // Define game states
     // -1 = Not In Level
     // 0 = Preparation Phase
@@ -15,12 +17,12 @@ public class GameManagerScript : MonoBehaviour
 
     public GameObject preparationView;
     public GameObject pauseView;
-    public GameObject gameOverView;
+    public GameObject lossView;
     public GameObject winView;
     public GameObject inGameView;
 
+    public TextMeshProUGUI levelText;
     public int currentLevel = 0;
-    public EnemyCompositionDataSO enemyCompositionDataSO;
     public SpawnManagerScript spawnManager;
 
     private void Awake()
@@ -28,22 +30,18 @@ public class GameManagerScript : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 
     private void Start()
     {
-        state = -1; 
+        Initialize();
+        state = -1;
     }
 
-    void Update()
+    private void Initialize()
     {
-        if(SceneManager.GetActiveScene().name.Contains("Level"))
+        if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
             // if (preparationView == null)
             // {
@@ -53,19 +51,26 @@ public class GameManagerScript : MonoBehaviour
             // {
             //     pauseView = GameObject.Find("PauseView");
             // }
-            // if (gameOverView == null)
-            // {
-            //     gameOverView = GameObject.Find("GameOverView");
-            // }
-            // if (winView == null)
-            // {
-            //     winView = GameObject.Find("WinView");
-            // }
+            if (lossView == null)
+            {
+                lossView = GameObject.Find("LossView");
+            }
+            if (winView == null)
+            {
+                winView = GameObject.Find("WinView");
+            }
             if (inGameView == null)
             {
                 inGameView = GameObject.Find("InGameView");
             }
         }
+        
+        levelText.text = "Level " + currentLevel + " - Wave " + (spawnManager.waveNumber+1);
+    }
+
+    void Update()
+    {
+        
 
         // Handle state transitions or updates here
         switch (state)
@@ -79,10 +84,10 @@ public class GameManagerScript : MonoBehaviour
                 // Preparation Phase logic
                 if (!CheckIfActive(preparationView))
                 {
-                    preparationView.SetActive(true);
+                    // preparationView.SetActive(true);
                     inGameView.SetActive(false);
-                    pauseView.SetActive(false);
-                    gameOverView.SetActive(false);
+                    // pauseView.SetActive(false);
+                    lossView.SetActive(false);
                     winView.SetActive(false);
                 }
                 break;
@@ -93,16 +98,12 @@ public class GameManagerScript : MonoBehaviour
                     inGameView = GameObject.Find("InGameView");
                     Debug.Log("InGameView found: " + inGameView.name);
                 }
-                // else
-                // {
-                //     Debug.Log("InGameView already exists: " + inGameView.name);
-                // }
-
-                if(spawnManager.enemiesLeft <= 0 && spawnManager.spawnCompleted)
+                else
                 {
-                    // All enemies defeated, change to win state
-                    state = 2; // Change to win state
+                    // Debug.Log("InGameView already exists: " + inGameView.name);
                 }
+
+                
                 break;
 
             case 2:
@@ -110,22 +111,22 @@ public class GameManagerScript : MonoBehaviour
                 // Round Win State logic
                 if (!CheckIfActive(winView))
                 {
-                    preparationView.SetActive(false);
+                    // preparationView.SetActive(false);
                     inGameView.SetActive(false);
-                    pauseView.SetActive(false);
-                    gameOverView.SetActive(false);
+                    // pauseView.SetActive(false);
+                    lossView.SetActive(false);
                     winView.SetActive(true);
                 }
                 break;
 
             case 3:
                 // Round Lose State logic
-                if (!CheckIfActive(gameOverView))
+                if (!CheckIfActive(lossView))
                 {
-                    preparationView.SetActive(false);
+                    // preparationView.SetActive(false);
                     inGameView.SetActive(false);
-                    pauseView.SetActive(false);
-                    gameOverView.SetActive(true);
+                    // pauseView.SetActive(false);
+                    lossView.SetActive(true);
                     winView.SetActive(false);
                 }
                 break;
@@ -134,10 +135,10 @@ public class GameManagerScript : MonoBehaviour
                 // Paused State logic
                 if (!CheckIfActive(pauseView))
                 {
-                    preparationView.SetActive(false);
+                    // preparationView.SetActive(false);
                     inGameView.SetActive(false);
-                    pauseView.SetActive(true);
-                    gameOverView.SetActive(false);
+                    // pauseView.SetActive(true);
+                    lossView.SetActive(false);
                     winView.SetActive(false);
                 }
                 break;

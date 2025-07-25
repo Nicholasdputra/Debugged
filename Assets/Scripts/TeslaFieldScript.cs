@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TeslaFieldScript : MonoBehaviour
 {
-    int damage;
+    public int damage;
 
     void Start()
     {
@@ -13,7 +13,7 @@ public class TeslaFieldScript : MonoBehaviour
     ///Slowly expands itself from  a scale of 1 1 1 to 3.75 3 1 in 3 seconds
     IEnumerator ExpandField()
     {
-        Vector3 targetScale = new Vector3(3.75f, 3.05f, 1f);
+        Vector3 targetScale = new Vector3(2.75f, 2.75f, 1f);
         float duration = 3f;
         float elapsedTime = 0f;
 
@@ -37,8 +37,8 @@ public class TeslaFieldScript : MonoBehaviour
             Enemy enemy = collision.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.health -= damage; // Example damage value
-                Debug.Log("Enemy hit by Tesla Field: " + enemy.name + " for " + damage + " damage.");
+                enemy.TakeDamage(damage);
+                // Debug.Log("Enemy hit by Tesla Field: " + enemy.name + " for " + damage + " damage.");
             }
         }
     }

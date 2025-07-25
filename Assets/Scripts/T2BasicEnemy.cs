@@ -5,7 +5,7 @@ public class T2BasicEnemy : Enemy
     void Start()
     {
         canMove = true;
-        health = 500;
+        health = 400;
         speed = movementSpeedMultiplier * 1.0f;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -13,6 +13,5 @@ public class T2BasicEnemy : Enemy
     void Update()
     {
         CheckIfCanMove();
-        CheckIfDead();
     }
 }
