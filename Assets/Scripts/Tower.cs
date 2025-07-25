@@ -26,6 +26,7 @@ public abstract class Tower : MonoBehaviour
     public float drainCooldown;
 
     [Header("Attack Settings")]
+    public Coroutine DelayFirstAttackCoroutine;
     public Coroutine attackCoroutine;
     public int damage;
     public float range;
@@ -36,11 +37,14 @@ public abstract class Tower : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite baseOnSprite;
     public Sprite baseOffSprite;
+    public Sprite hoverOnSprite;
+    public Sprite hoverOffSprite;
 
     void SwitchStates()
     {
         if (state == 0 && RequirementCheck() && canSwitch)
         {
+            DelayFirstAttackCoroutine = StartCoroutine(StartAttacking());
             animator.enabled = true; // Enable the animator component
             state = 1; // Switch On
             animator.SetInteger("state", state); // Set the animator state to "On" 
@@ -117,6 +121,13 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
+    public IEnumerator StartAttacking()
+    {
+        yield return new WaitForSeconds(0.5f); // Wait for the initial delay
+        attackCoroutine = StartCoroutine(AttackCoroutine());
+        DelayFirstAttackCoroutine = null; // Clear reference
+    }
+
     public IEnumerator AttackCoroutine()
     {
         while (state == 1)
@@ -150,13 +161,6 @@ public abstract class Tower : MonoBehaviour
         // Debug.Log("Switch cooldown complete, can switch again");
     }
 
-    // public IEnumerator FirstAttackDelayCoroutine()
-    // {
-    //     yield return new WaitForSeconds(0.5f); // Delay before the first attack
-    //     attackCoroutine = StartCoroutine(AttackCoroutine());
-        
-    //     attackDelayCoroutine = null; // Reset the coroutine reference
-    // }
 
     public IEnumerator DrainCoroutine()
     {
@@ -196,6 +200,16 @@ public abstract class Tower : MonoBehaviour
         if (button != null)
         {
             button.SetActive(true);
+            spriteRenderer.sprite = (state == 1) ? hoverOnSprite : hoverOffSprite;
+        }
+    }
+
+    public void OnMouseOver()
+    {
+        if (button != null)
+        {
+            button.SetActive(true);
+            spriteRenderer.sprite = (state == 1) ? hoverOnSprite : hoverOffSprite;
         }
     }
 
@@ -205,6 +219,7 @@ public abstract class Tower : MonoBehaviour
         if (button != null)
         {
             button.SetActive(false);
+            spriteRenderer.sprite = (state == 1) ? baseOnSprite : baseOffSprite;
         }
     }
 }

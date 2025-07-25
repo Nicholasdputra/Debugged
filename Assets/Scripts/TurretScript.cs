@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Collections;
 using UnityEngine;
 
 public class TurretScript : Tower
@@ -10,11 +11,14 @@ public class TurretScript : Tower
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         FindLane();
         muzzle = transform.GetChild(0).gameObject;
         mainHub = transform.parent.Find("Battery").GetComponent<HubScript>();
-        
-        attackCoroutine = null;
+
+        // attackCoroutine = null;
         drainCoroutine = null;
 
         state = 0; // Initial state
@@ -28,7 +32,7 @@ public class TurretScript : Tower
         range = 999f;
         attackCooldown = 2.5f;
         attackCost = 3;
-        
+
         // Initialize the tower
         SpawnUIButtons();
     }
@@ -38,11 +42,11 @@ public class TurretScript : Tower
         CheckForCharge();
         if (state == 1)
         {
-            if (attackCoroutine == null)
-            {
-                Debug.Log("Starting attack coroutine for:" + gameObject.name);
-                attackCoroutine = StartCoroutine(AttackCoroutine());
-            }
+            // if (attackCoroutine == null)
+            // {
+            //     Debug.Log("Starting attack coroutine for:" + gameObject.name);
+            //     attackCoroutine = StartCoroutine(AttackCoroutine());
+            // }
             if (drainCoroutine == null)
             {
                 Debug.Log("Starting drain coroutine for:" + gameObject.name);
@@ -80,7 +84,7 @@ public class TurretScript : Tower
     {
         // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
         // Implement attack logic here
-        if(animator.enabled == false)
+        if (animator.enabled == false)
         {
             animator.enabled = true; // Enable the animator to play the attack animation
         }
@@ -92,7 +96,13 @@ public class TurretScript : Tower
             turnOffAnimatorCoroutine = null; // Clear reference
         }
         turnOffAnimatorCoroutine = StartCoroutine(TurnOffAnimatorCoroutine());
-        
+
+        StartCoroutine(SpawnBullet());
+    }
+
+    public IEnumerator SpawnBullet()
+    {
+        yield return new WaitForSeconds(0.4f); // Wait for the attack animation to play
         AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretFireSFXClip);
         GameObject proj = Instantiate(projectilePrefab, muzzle.transform.position, Quaternion.identity);
         proj.layer = 2;

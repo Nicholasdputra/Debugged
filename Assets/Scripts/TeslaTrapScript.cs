@@ -11,9 +11,10 @@ public class TeslaTrapScript : Tower
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         mainHub = transform.parent.Find("Battery").GetComponent<HubScript>();
         
-        attackCoroutine = null;
+        // attackCoroutine = null;
         drainCoroutine = null;
 
         state = 0; // Initial state
@@ -52,10 +53,9 @@ public class TeslaTrapScript : Tower
         }
         if(state == 1)
         {
-            if (attackCoroutine == null)
+            if(animator.enabled && turnOffAnimatorCoroutine == null)
             {
-                Debug.Log("Starting attack coroutine for:" + gameObject.name);
-                attackCoroutine = StartCoroutine(AttackCoroutine());
+                turnOffAnimatorCoroutine = StartCoroutine(TurnOffAnimatorCoroutine());
             }
             if (drainCoroutine == null)
             {

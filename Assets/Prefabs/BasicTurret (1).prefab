@@ -193,13 +193,14 @@ MonoBehaviour:
   switchOnCost: 0
   passiveDrain: 0
   drainCooldown: 0
-  canAttack: 0
   damage: 0
   range: 0
   attackCost: 0
   spriteRenderer: {fileID: 0}
   baseOnSprite: {fileID: -1537621574, guid: 28011389a61e403489cd78ed850994fb, type: 3}
   baseOffSprite: {fileID: 1408491166, guid: 28011389a61e403489cd78ed850994fb, type: 3}
+  hoverOnSprite: {fileID: 21300000, guid: eb4f215f785b5b04cbb947613585b63b, type: 3}
+  hoverOffSprite: {fileID: 21300000, guid: 764c2c18640675a4eb21b149199f469a, type: 3}
   projectilePrefab: {fileID: 8114109859373414955, guid: 20e52ff3cba00084ba060df96f3fe893, type: 3}
   muzzle: {fileID: 0}
   lane: 0
