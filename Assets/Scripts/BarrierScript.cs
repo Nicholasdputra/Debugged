@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BarrierScript : MonoBehaviour
 {
-    int health = 9999;
+    int health = 3;
 
     void OnTriggerEnter2D(Collider2D other)
     {

@@ -3,10 +3,12 @@ using UnityEngine;
 public class TurretScript : Tower
 {
     public GameObject projectilePrefab;
+    public GameObject muzzle;
     int projectileSpeed = 6;
 
     void Start()
     {
+        muzzle = transform.GetChild(0).gameObject;
         mainHub = transform.parent.Find("Battery").GetComponent<HubScript>();
         
         attackCoroutine = null;
@@ -66,7 +68,7 @@ public class TurretScript : Tower
         // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
         // Implement attack logic here
         AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretFireSFXClip);
-        GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject proj = Instantiate(projectilePrefab, muzzle.transform.position, Quaternion.identity);
         proj.layer = 2;
 
         mainHub.currentCharge -= attackCost; // Deduct charge for attack

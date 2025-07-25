@@ -12,9 +12,21 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -726560110, guid: 85ea48f856a230e4299ebb4512864c5b, type: 3}
+    - target: {fileID: 822420647666647197, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1524636941831200422, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
       propertyPath: m_Name
       value: T1Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862184342374044376, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862184342374044376, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6862184342374044376, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
