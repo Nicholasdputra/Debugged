@@ -50,7 +50,7 @@ public abstract class Tower : MonoBehaviour
             animator.SetInteger("state", state); // Set the animator state to "On" 
             mainHub.currentLoad += 1; // Increment load when switching on
             mainHub.currentCharge -= switchOnCost; // Deduct charge for switching on
-            button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn Off";
+            // button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn Off";
             StartCoroutine(SwitchCooldownCoroutine());
             // Debug.Log("Tower is now ON");
         }
@@ -61,7 +61,7 @@ public abstract class Tower : MonoBehaviour
             state = 0; // Switch Off
             animator.SetInteger("state", state); // Set the animator state to "Off"
             StartCoroutine(TurnOffAnimatorCoroutine());
-            button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
+            // button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
             StartCoroutine(SwitchCooldownCoroutine());
             // Debug.Log("Tower is now OFF");
         }
@@ -188,7 +188,7 @@ public abstract class Tower : MonoBehaviour
         button.GetComponent<RectTransform>().position = worldPos;
 
         button.GetComponent<Button>().onClick.AddListener(SwitchStates);
-        button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
+        // button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
         // Debug.Log("UI Button Spawned for Tower at " + transform.position);
 
         button.SetActive(false); // Initially hide the button
