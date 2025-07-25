@@ -7,7 +7,7 @@ public class BarrierScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
-        {
+        {   
             GameManagerScript.Instance.spawnManager.enemiesLeft--;
             GameManagerScript.Instance.spawnManager.enemyInRow[other.GetComponent<Enemy>().row]--;
             

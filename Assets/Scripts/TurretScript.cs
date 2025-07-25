@@ -1,13 +1,16 @@
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class TurretScript : Tower
 {
     public GameObject projectilePrefab;
     public GameObject muzzle;
+    public int lane;
     int projectileSpeed = 6;
 
     void Start()
     {
+        FindLane();
         muzzle = transform.GetChild(0).gameObject;
         mainHub = transform.parent.Find("Battery").GetComponent<HubScript>();
         
@@ -63,6 +66,16 @@ public class TurretScript : Tower
         }
     }
 
+    protected void FindLane()
+    {
+        string objectName = gameObject.name; // e.g., "turret 1"
+        Match match = Regex.Match(objectName, @"\d+"); // Finds first sequence of digits
+        if (match.Success)
+        {
+            lane = int.Parse(match.Value);
+        }
+    }
+
     protected override void Attack()
     {
         // Debug.Log("Attacking with Basic Tower: " + gameObject.name);
@@ -77,6 +90,7 @@ public class TurretScript : Tower
         BasicProjectileScript projectileScript = proj.GetComponent<BasicProjectileScript>();
         if (projectileScript != null)
         {
+            projectileScript.lane = lane; // Set the lane for the projectile
             projectileScript.damage = damage;
             projectileScript.speed = projectileSpeed; // Set speed or any other properties as needed
         }

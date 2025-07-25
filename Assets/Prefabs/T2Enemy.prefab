@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: T2Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1524636941831200422, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6862184342374044376, guid: 446cdd5256922bd4c9eda9d9693f1f9e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 3
