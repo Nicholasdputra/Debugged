@@ -4,11 +4,11 @@ using Unity.VisualScripting;
 
 public class SpawnManagerScript : MonoBehaviour
 {
-    public Canvas canvas;
+    // public Canvas canvas;
     public int enemiesLeft;
     public GameObject[] spawnPoints;
     public bool[] spawnPointIsActive;
-    private Vector3[] worldSpawnPositions;
+    // private Vector3[] worldSpawnPositions;
     public EnemyCompositionSO enemiesToSpawn;
     public WaveSO currentWave;
     public int[] enemyInRow;
@@ -20,40 +20,40 @@ public class SpawnManagerScript : MonoBehaviour
         spawnCompleted = false;
         GameObject inGameView = GameManagerScript.Instance.inGameView;
         //look for a child named base canvas inside inGameView (has to be by name because there can be multiple canvases)
-        if (inGameView != null)
-        {
-            canvas = inGameView.transform.Find("BaseCanvas").GetComponent<Canvas>();
-            if (canvas == null)
-            {
-                Debug.LogError("Base Canvas not found in InGameView.");
-            }
-            else
-            {
-                // Debug.Log("Base Canvas found: " + canvas.name);
-            }
-        }
-        else
-        {
-            Debug.LogError("InGameView not found.");
-        }
+        // if (inGameView != null)
+        // {
+        //     canvas = inGameView.transform.Find("BaseCanvas").GetComponent<Canvas>();
+        //     if (canvas == null)
+        //     {
+        //         Debug.LogError("Base Canvas not found in InGameView.");
+        //     }
+        //     else
+        //     {
+        //         // Debug.Log("Base Canvas found: " + canvas.name);
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.LogError("InGameView not found.");
+        // }
         spawnPointIsActive = new bool[spawnPoints.Length];
         enemyInRow = new int[spawnPoints.Length];
         StartCoroutine(SpawnEnemies());
     }
     
-    private void CalculateSpawnPositions()
-    {
-        worldSpawnPositions = new Vector3[spawnPoints.Length];
+    // private void CalculateSpawnPositions()
+    // {
+    //     worldSpawnPositions = new Vector3[spawnPoints.Length];
         
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            RectTransform rectTransform = spawnPoints[i].GetComponent<RectTransform>();
-            Vector3 screenPos = canvas.worldCamera.WorldToScreenPoint(rectTransform.position);
-            worldSpawnPositions[i] = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 10f));
+    //     for (int i = 0; i < spawnPoints.Length; i++)
+    //     {
+    //         RectTransform rectTransform = spawnPoints[i].GetComponent<RectTransform>();
+    //         Vector3 screenPos = canvas.worldCamera.WorldToScreenPoint(rectTransform.position);
+    //         worldSpawnPositions[i] = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 10f));
             
-            // Debug.Log($"Spawn Point {i} ({spawnPoints[i].name}): UI Pos = {rectTransform.position}, World Pos = {worldSpawnPositions[i]}");
-        }
-    }
+    //         // Debug.Log($"Spawn Point {i} ({spawnPoints[i].name}): UI Pos = {rectTransform.position}, World Pos = {worldSpawnPositions[i]}");
+    //     }
+    // }
 
     private IEnumerator SpawnEnemies()
     {
@@ -65,7 +65,7 @@ public class SpawnManagerScript : MonoBehaviour
         }
 
         yield return new WaitForEndOfFrame(); // Ensure UI is ready
-        CalculateSpawnPositions();
+        // CalculateSpawnPositions();
 
         enemiesLeft = enemiesToSpawn.GetTotalEnemyCount();
         Debug.Log("Total enemies to spawn: " + enemiesLeft);
@@ -158,7 +158,7 @@ public class SpawnManagerScript : MonoBehaviour
             }
             enemyInRow[randomSpawnPointIndex]++;
 
-            Vector3 worldPos = worldSpawnPositions[randomSpawnPointIndex];
+            Vector3 worldPos = spawnPoints[randomSpawnPointIndex].transform.position;
 
             // Debug.Log("Spawning enemy at world position: " + worldPos);
 
