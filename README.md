@@ -4,23 +4,23 @@ Debugged is a pixel tower defense game which takes place in the far future. In t
 # 📜 Scripts
 
 | Script Name | Script Description |
-| --- | --- |
+|---|---|
 | 🎧 AudioManager.cs | Responsible for the game's sfx and bgm |
 | 🛡️ BarrierScript.cs | Responsible for the barrier near the 'base / hub' that instakills the enemy when they reach it but only has three uses |
 | 🏹 BasicProjectileScript.cs | A basic projectile that takes the form of a 'laser bullet'|
 | 🚫 DeleteProjectileScript.cs | Responsible for deleting projectiles that go out of the map so they don't make the game run slower |
 | 🎯 Enemy.cs | An abstract class that functions as a blueprint for what functions and attributes the enemies in general will have |
-| 🎌 EnemyCompositionDataSO.cs | A scriptable object that holds the list of enemy composition data for all levels |
+| 🎌&nbsp;EnemyCompositionDataSO.cs | A scriptable object that holds the list of enemy composition data for all levels |
 | 🚩 EnemyCompositionSO.cs | A scriptable object that holds the list of waves that are in a level and the time between the waves|
 | 👆 LevelSelectScript.cs | A script for level selection |
-| 👎 LossCheck | A script attached to the base / hub that detects if the enemy has breached the defenses to trigger a loss |
+| 👎 LossCheck.cs | A script attached to the base / hub that detects if the enemy has breached the defenses to trigger a loss |
 | 🏠 MainMenu.cs | A script used for handling the main menu of a game |
 | 🗻 PassiveSounds.cs | A script used for handling passive sounds that would sound weird or too loud if they stacked |
 | 🫳 PlaceableItemScript.cs | A script used for placing down a specific tower |
 | ⭕ PlaceableItemSlotScript.cs | A script used for marking placeable tiles |
-| 🐜 T1BasicEnemy | This script is assigns a basic bug enemy its attributes and handles its movement |
-| 🐞 T2BasicEnemy | This script is assigns a tier two (tankier) enemy its attributes and handles its movement |
-| 📡 TeslaFieldScript | A script used for making the tesla tower (AOE Tower that damages the enemies around it) function |
-| 🔫 TurretScript | A script used for making the base turret tower function |
-| 🏰 Tower | An abstract class used as a blueprint for towers |
-| 🌊 WaveSO | A scriptable object that holds the enemy details of each individual wave |
+| 🐜 T1BasicEnemy.cs | This script is assigns a basic bug enemy its attributes and handles its movement |
+| 🐞 T2BasicEnemy.cs | This script is assigns a tier two (tankier) enemy its attributes and handles its movement |
+| 📡 TeslaFieldScript.cs | A script used for making the tesla tower (AOE Tower that damages the enemies around it) function |
+| 🔫 TurretScript.cs | A script used for making the base turret tower function |
+| 🏰 Tower.cs | An abstract class used as a blueprint for towers |
+| 🌊 WaveSO.cs | A scriptable object that holds the enemy details of each individual wave |
