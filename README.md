@@ -1,6 +1,14 @@
 # 🪰 About
 Debugged is a pixel tower defense game which takes place in the far future. In this future, everything is super futuristic and high energy, yet in the pursuit of making this future, they've killed off one big subclass of life, which are insects. So, they eventually chose to make a world which is more sustainable, converting their main source of energy to something more renewable, like solar energy, they've also chosen to put most of said panels on insect like robots, as a way to both maximize sun exposure by having the panels be mobile, and specifically in the form of an insect as a reminder to prioritize the ecosystem in future technological advancements. All was well until one day, the A.I. in said robots began to go rogue and turn against humanity. Now, you as the commander of humanity's last line of defense must manage what little energy you have left on hand to fend off the rogue mecha.
 
+---
+
+# 💻 My Contributions 
+
+For this project, I took about 30-40 hours and I was the only programmer so I coded everything, you can see my scripts down below!
+
+---
+
 # 📜 Scripts
 
 | Script Name | Script Description |
