@@ -24,3 +24,8 @@ Debugged is a pixel tower defense game which takes place in the far future. In t
 | 🔫 TurretScript.cs | A script used for making the base turret tower function |
 | 🏰 Tower.cs | An abstract class used as a blueprint for towers |
 | 🌊 WaveSO.cs | A scriptable object that holds the enemy details of each individual wave |
+
+# 🕹️ Controls
+| Button | Actions |
+|---|---|
+| Left Click | Activate and Deactivate towers
