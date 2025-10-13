@@ -5,7 +5,7 @@ Debugged is a pixel tower defense game which takes place in the far future. In t
 
 # 💻 My Contributions 
 
-For this project, I took about 30-40 hours and I was the only programmer so I coded everything, you can see my scripts down below!
+For this project, I took about 30-40 hours and I was the only programmer so I coded every script which you can see down below this!
 
 ---
 
@@ -36,4 +36,12 @@ For this project, I took about 30-40 hours and I was the only programmer so I co
 # 🕹️ Controls
 | Button | Actions |
 |---|---|
-| Left Click | Activate and Deactivate towers
+| Left Click | Activate and Deactivate towers |
+
+---
+
+# 🏠 Project Members
+
+* Nicholas Dwi Putra (Me) - Game Programmer  
+* Rafael Wirasana Wijaya - Game Artist  
+* Steven Alamsjah - Game Designer  
