@@ -3,12 +3,6 @@ Debugged is a pixel tower defense game which takes place in the far future. In t
 
 ---
 
-# 💻 My Contributions 
-
-For this project, I took about 30-40 hours and I was the only programmer so I coded every script which you can see down below this!
-
----
-
 # 📜 Scripts
 
 | Script Name | Script Description |
