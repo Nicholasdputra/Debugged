@@ -28,9 +28,6 @@ public class TeslaTrapScript : Tower
         range = 3f;
         attackCooldown = 1f;
         attackCost = 3;
-        
-        // Initialize the tower
-        SpawnUIButtons();
     }
 
     void Update()

@@ -9,7 +9,6 @@ public abstract class Tower : MonoBehaviour
 {
     [Header("References To Other Objects")]
     public HubScript mainHub;
-    GameObject button;
     public GameObject buttonPrefab;
     public Animator animator;
 
@@ -40,7 +39,7 @@ public abstract class Tower : MonoBehaviour
     public Sprite hoverOnSprite;
     public Sprite hoverOffSprite;
 
-    void SwitchStates()
+    public void SwitchStates()
     {
         if (state == 0 && RequirementCheck() && canSwitch)
         {
@@ -50,9 +49,7 @@ public abstract class Tower : MonoBehaviour
             animator.SetInteger("state", state); // Set the animator state to "On" 
             mainHub.currentLoad += 1; // Increment load when switching on
             mainHub.currentCharge -= switchOnCost; // Deduct charge for switching on
-            // button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn Off";
             StartCoroutine(SwitchCooldownCoroutine());
-            // Debug.Log("Tower is now ON");
         }
         else if (state == 1 && canSwitch)
         {
@@ -61,9 +58,7 @@ public abstract class Tower : MonoBehaviour
             state = 0; // Switch Off
             animator.SetInteger("state", state); // Set the animator state to "Off"
             StartCoroutine(TurnOffAnimatorCoroutine());
-            // button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
             StartCoroutine(SwitchCooldownCoroutine());
-            // Debug.Log("Tower is now OFF");
         }
         else
         {
@@ -113,7 +108,6 @@ public abstract class Tower : MonoBehaviour
             {
                 Debug.Log("Not enough charge to keep the tower ON, switching OFF");
                 state = 0; // Switch Off
-                // canAttack = false; // Disable attack
                 animator.enabled = true; // Enable the animator component
                 animator.SetInteger("state", state);
                 StartCoroutine(TurnOffAnimatorCoroutine());
@@ -134,19 +128,16 @@ public abstract class Tower : MonoBehaviour
         {
             if (mainHub.currentCharge >= attackCost)
             {
-                // Debug.Log("Attacking with " + gameObject.name + ", deducting " + attackCost + " charge");
                 mainHub.currentCharge -= attackCost;
-                // Debug.Log("Current Charge After Attack: " + mainHub.currentCharge);
                 Attack();
                 yield return new WaitForSeconds(attackCooldown);
             }
             else if (mainHub.currentCharge >= attackCost)
             {
-                // Debug.Log("Cannot attack right now, waiting for cooldown");
+
             }
             else
             {
-                // Debug.Log("Not enough charge to attack");
                 yield return null;
             }
         }
@@ -158,7 +149,6 @@ public abstract class Tower : MonoBehaviour
         canSwitch = false;
         yield return new WaitForSeconds(switchCooldown);
         canSwitch = true;
-        // Debug.Log("Switch cooldown complete, can switch again");
     }
 
 
@@ -166,60 +156,21 @@ public abstract class Tower : MonoBehaviour
     {
         while (state == 1)
         {
-            // Debug.Log("Passive drain of " + passiveDrain + " from " + gameObject.name);
             mainHub.currentCharge -= passiveDrain;
-            // Debug.Log("Current Charge: " + mainHub.currentCharge);
             yield return new WaitForSeconds(drainCooldown);
         }
     }
 
     protected abstract void Attack();
 
-
-    public void SpawnUIButtons()
+    public void OnTowerMouseEnter()
     {
-        Canvas canvas = transform.parent.Find("OverlayCanvas").GetComponent<Canvas>();
-        Vector3 screenPos = canvas.worldCamera.WorldToScreenPoint(transform.position);
-        Vector3 worldPos = canvas.worldCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, canvas.planeDistance));
-        
+        spriteRenderer.sprite = (state == 1) ? hoverOnSprite : hoverOffSprite;
 
-        button = Instantiate(buttonPrefab, canvas.transform);
-
-        button.GetComponent<RectTransform>().position = worldPos;
-
-        button.GetComponent<Button>().onClick.AddListener(SwitchStates);
-        // button.GetComponentInChildren<TextMeshProUGUI>().text = "Turn On";
-        // Debug.Log("UI Button Spawned for Tower at " + transform.position);
-
-        button.SetActive(false); // Initially hide the button
     }
-
-    public void OnMouseEnter()
+    
+    public void OnTowerMouseExit()
     {
-        // Debug.Log("Pointer entered tower: " + gameObject.name);
-        if (button != null)
-        {
-            button.SetActive(true);
-            spriteRenderer.sprite = (state == 1) ? hoverOnSprite : hoverOffSprite;
-        }
-    }
-
-    public void OnMouseOver()
-    {
-        if (button != null)
-        {
-            button.SetActive(true);
-            spriteRenderer.sprite = (state == 1) ? hoverOnSprite : hoverOffSprite;
-        }
-    }
-
-    public void OnMouseExit()
-    {
-        // Debug.Log("Pointer exited tower: " + gameObject.name);
-        if (button != null)
-        {
-            button.SetActive(false);
-            spriteRenderer.sprite = (state == 1) ? baseOnSprite : baseOffSprite;
-        }
+        spriteRenderer.sprite = (state == 1) ? baseOnSprite : baseOffSprite;
     }
 }

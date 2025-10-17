@@ -10,7 +10,6 @@ public class LevelSelectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         levelButtons = GameObject.FindGameObjectsWithTag("LevelButton");
         foreach (GameObject button in levelButtons)
         {
@@ -54,11 +53,5 @@ public class LevelSelectScript : MonoBehaviour
         AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.buttonClickSFXClip);
         // Load the main menu scene
         SceneManager.LoadScene("MainMenu");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -32,9 +32,6 @@ public class TurretScript : Tower
         range = 999f;
         attackCooldown = 2.5f;
         attackCost = 3;
-
-        // Initialize the tower
-        SpawnUIButtons();
     }
 
     void Update()
@@ -42,14 +39,9 @@ public class TurretScript : Tower
         CheckForCharge();
         if (state == 1)
         {
-            // if (attackCoroutine == null)
-            // {
-            //     Debug.Log("Starting attack coroutine for:" + gameObject.name);
-            //     attackCoroutine = StartCoroutine(AttackCoroutine());
-            // }
             if (drainCoroutine == null)
             {
-                Debug.Log("Starting drain coroutine for:" + gameObject.name);
+                // Debug.Log("Starting drain coroutine for:" + gameObject.name);
                 drainCoroutine = StartCoroutine(DrainCoroutine());
             }
         }
@@ -105,7 +97,6 @@ public class TurretScript : Tower
         yield return new WaitForSeconds(0.4f); // Wait for the attack animation to play
         AudioManagerScript.Instance.PlaySFX(AudioManagerScript.Instance.turretFireSFXClip);
         GameObject proj = Instantiate(projectilePrefab, muzzle.transform.position, Quaternion.identity);
-        proj.layer = 2;
 
         mainHub.currentCharge -= attackCost; // Deduct charge for attack
         // Debug.Log("Current Charge After Attack: " + mainHub.currentCharge);
@@ -116,6 +107,7 @@ public class TurretScript : Tower
             projectileScript.lane = lane; // Set the lane for the projectile
             projectileScript.damage = damage;
             projectileScript.speed = projectileSpeed; // Set speed or any other properties as needed
+            projectileScript.knockbackForce = projectileSpeed / 3f; // Set knockback force
         }
     }
 }
